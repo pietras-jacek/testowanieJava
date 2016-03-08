@@ -1,5 +1,4 @@
 INDEX VERSION 1.126+/home/PJWSTK/s10146/Pulpit/testy/.metadata/.plugins/org.eclipse.jdt.core
 3174242775.index
-4275101024.index
 3768017035.index
 1899637456.index

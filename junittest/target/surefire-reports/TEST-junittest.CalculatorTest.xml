@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.073" errors="0" skipped="0" tests="6" name="junittest.CalculatorTest">
+<testsuite failures="0" time="0.067" errors="0" skipped="0" tests="6" name="junittest.CalculatorTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-7-oracle/jre/lib/amd64"/>
@@ -64,5 +64,5 @@
   <testcase time="0" classname="junittest.CalculatorTest" name="checkAdd"/>
   <testcase time="0" classname="junittest.CalculatorTest" name="checkDiv"/>
   <testcase time="0" classname="junittest.CalculatorTest" name="checkSub"/>
-  <testcase time="0" classname="junittest.CalculatorTest" name="checkArithExeption"/>
+  <testcase time="0.001" classname="junittest.CalculatorTest" name="checkArithExeption"/>
 </testsuite>
