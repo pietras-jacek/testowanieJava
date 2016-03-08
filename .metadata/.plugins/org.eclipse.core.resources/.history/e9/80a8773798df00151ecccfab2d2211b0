@@ -1,0 +1,9 @@
+package lab01;
+
+import zad1.Calculator;
+
+public class CalculatorTest {
+	
+	Calculator calc = new Calculator();
+
+}
