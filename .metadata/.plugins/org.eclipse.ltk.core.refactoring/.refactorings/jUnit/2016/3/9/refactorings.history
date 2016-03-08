@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename package &apos;kalkulator&apos; to &apos;jUnit.tests&apos;&#x0A;- Original project: &apos;jUnit&apos;&#x0A;- Original element: &apos;jUnit/src/kalkulator&apos;&#x0A;- Renamed element: &apos;jUnit/src/jUnit.tests&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;kalkulator&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;kalkulator" name="jUnit.tests" qualified="false" references="true" stamp="1456822230833" textual="false" version="1.0"/>
-</session>
