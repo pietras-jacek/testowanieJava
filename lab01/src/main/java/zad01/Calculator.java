@@ -1,4 +1,4 @@
-package junittest;
+package zad01;
 
 public class Calculator {
 	
