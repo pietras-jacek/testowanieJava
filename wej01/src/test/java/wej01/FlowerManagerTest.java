@@ -7,16 +7,14 @@ import org.junit.Test;
 
 public class FlowerManagerTest {
 
-	FlowerManager flower = new FlowerManager();
+	Flower fl = new Flower("Mlecz");
 	
-	
-	@Before
-	public void initializeTestEnv() throws Exception {
-	}
+	FlowerManager flm = new FlowerManager();
 	
 	@Test
 	public void checkAdd() {
-		assertEquals(flower.getName(), flower.addFlower(null));	
+		flm.add(fl);
+		assertEquals(fl.getName(), flm.getAllFlowers().get(0).getName());
 	}
 
 }
