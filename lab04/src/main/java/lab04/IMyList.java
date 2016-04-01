@@ -1,7 +1,5 @@
 package lab04;
 
-import java.util.List;
-
 public interface IMyList {
 	public void add(Flower f);
 
