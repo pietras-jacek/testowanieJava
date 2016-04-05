@@ -49,50 +49,50 @@ public class MockitoAppTest {
         assertThat(messenger.sendMessage(VALID_SERVER, VALID_MESSAGE),
                 either(equalTo(0)).or(equalTo(1)));
 
-        verify(msMock, atLeastOnce());
+        verify(msMock, atLeastOnce()).send(VALID_SERVER, VALID_MESSAGE);
     }
 
-//	@Test
-//	public void sendingInvalidServer() throws MalformedRecipientException {
-//    
-//		when(msMock.checkConnection(INVALID_SERVER)).thenReturn(
-//				ConnectionStatus.FAILURE);
-//		when(msMock.send(INVALID_SERVER, VALID_MESSAGE)).thenReturn(
-//				SendingStatus.SENDING_ERROR);
-//		
-//		assertThat(messenger.testConnection(INVALID_SERVER), equalTo(1));
-//		assertEquals(1, messenger.sendMessage(INVALID_SERVER, VALID_MESSAGE));
-//
-//		verify(msMock);
-//	}
+	@Test
+	public void sendingInvalidServer() throws MalformedRecipientException {
+    
+		when(msMock.checkConnection(INVALID_SERVER)).thenReturn(
+				ConnectionStatus.FAILURE);
+		when(msMock.send(INVALID_SERVER, VALID_MESSAGE)).thenReturn(
+				SendingStatus.SENDING_ERROR);
+		
+		assertThat(messenger.testConnection(INVALID_SERVER), equalTo(1));
+		assertEquals(1, messenger.sendMessage(INVALID_SERVER, VALID_MESSAGE));
 
-//	@Test
-//	public void sendingInvalidReceipient() throws MalformedRecipientException {
-//
-//		doThrow(new MalformedRecipientException()).when(msMock.send(VALID_SERVER, INVALID_MESSAGE));
-//		
-//		when(msMock.send(VALID_SERVER, INVALID_MESSAGE)).thenThrow(
-//				new MalformedRecipientException());
-//
-//		
-//
-//		assertEquals(2, messenger.sendMessage(VALID_SERVER, INVALID_MESSAGE));
-//		verify(msMock, atLeastOnce());
-//	}
+		verify(msMock).checkConnection(INVALID_SERVER);
+	}
 
+	@Test
+	public void sendingInvalidReceipient() throws MalformedRecipientException {
+		
+		when(msMock.send(VALID_SERVER, INVALID_MESSAGE)).thenThrow(
+				new MalformedRecipientException());
+
+		assertEquals(2, messenger.sendMessage(VALID_SERVER, INVALID_MESSAGE));
+		verify(msMock).send(VALID_SERVER, INVALID_MESSAGE);
+	}
+
+	
 //	// Przechwytywanie parametrow
 //	@Test
 //	public void sendingConnectionStatus() {
 //
-//		Capture<String> capturedServer = EasyMock.newCapture();
+//		ArgumentCaptor<MessageService> captureServers = ArgumentCaptor.forClass(MessageService.class);
+//		
+//		Capture<String> capturedServer = Mockito.newCapture();
 //
-//		when(msMock.checkConnection(capture(capturedServer))).thenReturn(
+//		when(msMock.checkConnection(capture(captureServers))).thenReturn(
 //				ConnectionStatus.FAILURE);
 //		
 //
 //		assertEquals(1, messenger.testConnection(INVALID_SERVER));
-//		assertEquals(INVALID_SERVER, capturedServer.getValue());
+//		assertEquals(INVALID_SERVER, captureServers.getValue());
 //
+//		
 //		verify(msMock);
 //	}
 }
