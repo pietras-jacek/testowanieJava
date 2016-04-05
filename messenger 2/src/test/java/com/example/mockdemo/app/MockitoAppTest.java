@@ -77,22 +77,22 @@ public class MockitoAppTest {
 	}
 
 	
-//	// Przechwytywanie parametrow
-//	@Test
-//	public void sendingConnectionStatus() {
-//
-//		ArgumentCaptor<MessageService> captureServers = ArgumentCaptor.forClass(MessageService.class);
-//		
-//		Capture<String> capturedServer = Mockito.newCapture();
-//
-//		when(msMock.checkConnection(capture(captureServers))).thenReturn(
-//				ConnectionStatus.FAILURE);
-//		
-//
-//		assertEquals(1, messenger.testConnection(INVALID_SERVER));
-//		assertEquals(INVALID_SERVER, captureServers.getValue());
-//
-//		
-//		verify(msMock);
-//	}
+	// Przechwytywanie parametrow
+	@Test
+	public void sendingConnectionStatus() {
+
+		ArgumentCaptor<String> captureServers = ArgumentCaptor.forClass(String.class);
+		
+		
+
+		when(msMock.checkConnection(captureServers.capture())).thenReturn(
+				ConnectionStatus.FAILURE);
+		
+
+		assertEquals(1, messenger.testConnection(INVALID_SERVER));
+		assertEquals(INVALID_SERVER, captureServers.getValue());
+
+		
+		verify(msMock).checkConnection(INVALID_SERVER);
+	}
 }
