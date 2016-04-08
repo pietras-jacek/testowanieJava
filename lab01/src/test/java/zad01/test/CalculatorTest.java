@@ -1,4 +1,4 @@
-package zad01;
+package zad01.test;
 
 import static org.junit.Assert.*;
 
@@ -36,9 +36,9 @@ public class CalculatorTest {
 		assertEquals(true, calc.greather(5, 1));
 	}
 	
-	@Test(expected = ArithmeticException.class) 
-	public void checkArithExeption() {
-		int testCase = 2 / 0; 
-	}
+//	@Test(expected = ArithmeticException.class) 
+//	public void checkArithExeption() {
+//		int testCase = 2 / 0; 
+//	}
 	
 }
