@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/jbehave.messenger.iml" filepath="$PROJECT_DIR$/jbehave.messenger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jbehavedemo.iml" filepath="$PROJECT_DIR$/jbehavedemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab01 (1).iml" filepath="$PROJECT_DIR$/lab01 (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab01 (2).iml" filepath="$PROJECT_DIR$/lab01 (2).iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab04.iml" filepath="$PROJECT_DIR$/lab04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/messenger.iml" filepath="$PROJECT_DIR$/messenger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testowanieJava.iml" filepath="$PROJECT_DIR$/testowanieJava.iml" />
+    </modules>
+  </component>
+</project>

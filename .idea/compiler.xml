@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <resourceExtensions />
+    <wildcardResourcePatterns>
+      <entry name="!?*.java" />
+      <entry name="!?*.form" />
+      <entry name="!?*.class" />
+      <entry name="!?*.groovy" />
+      <entry name="!?*.scala" />
+      <entry name="!?*.flex" />
+      <entry name="!?*.kt" />
+      <entry name="!?*.clj" />
+      <entry name="!?*.aj" />
+    </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="jbehave.messenger" />
+        <module name="jbehavedemo" />
+        <module name="lab01 (2)" />
+        <module name="lab04" />
+        <module name="messenger" />
+        <module name="testowanieJava" />
+      </profile>
+      <profile default="false" name="Annotation profile for lab01" enabled="true">
+        <sourceOutputDir name="../wej01/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../wej01/target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="lab01 (1)" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="jbehave.messenger" target="1.8" />
+      <module name="jbehavedemo" target="1.8" />
+      <module name="lab01 (1)" target="1.8" />
+      <module name="lab01 (2)" target="1.8" />
+      <module name="lab04" target="1.8" />
+      <module name="messenger" target="1.8" />
+      <module name="testowanieJava" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
