@@ -27,9 +27,10 @@ public class MessageAppTest {
 
     private final String VALID_MESSAGE = "some message";
     private final String INVALID_MESSAGE = "ab";
+    
 
-    @Given("a message")
-    public void messageSetup() {
+    @Given("a server")
+    public void serverSetup() {
         messenger = new Messenger(new MessageServiceSimpleImpl());
     }
 
@@ -46,6 +47,32 @@ public class MessageAppTest {
     @Then("invalid should return $invalid_server")
     public void shouldInvalid(int invalid_server) {
         assertEquals(invalid_server, messenger.testConnection(INVALID_SERVER));
+    }
+
+    @When("try send a $valid_message to $valid_server")
+    public void sendValidMessage(String valid_message, String valid_server) {
+        messenger.sendMessage(valid_server, valid_message);
+    }
+
+    @Then("ValidSendMessage should return $vallid_number")
+    public void shouldValidMessage(int valid_number) {
+        assertEquals(valid_number, messenger.sendMessage(VALID_SERVER, VALID_MESSAGE));
+
+//        assertThat(messenger.sendMessage(VALID_SERVER, VALID_MESSAGE),
+//                either(equalTo(0)).or(equalTo(1)));
+    }
+
+    @When("try send a $invalid_message to $invalid_server")
+    public void sendInvalidMessage(String invalid_message, String invalid_server) {
+        messenger.sendMessage(invalid_server, invalid_message);
+    }
+
+    @Then("InvalidSendMessage should return $invalid_number")
+    public void shouldInvalidMessage(int invalid_number) {
+        assertEquals(invalid_number, messenger.sendMessage(INVALID_SERVER, INVALID_MESSAGE));
+
+//        assertThat(messenger.sendMessage(INVALID_SERVER, INVALID_MESSAGE),
+//                either(equalTo(0)).or(equalTo(1)));
     }
 
     @Test
