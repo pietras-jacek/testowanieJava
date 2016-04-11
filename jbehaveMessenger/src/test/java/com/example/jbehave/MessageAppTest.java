@@ -62,12 +62,12 @@ public class MessageAppTest {
 //                either(equalTo(0)).or(equalTo(1)));
     }
 
-    @When("try send a $invalid_message to $invalid_server")
+    @When("try sending a $invalid_message to $invalid_server")
     public void sendInvalidMessage(String invalid_message, String invalid_server) {
         messenger.sendMessage(invalid_server, invalid_message);
     }
 
-    @Then("InvalidSendMessage should return $invalid_number")
+    @Then("InvalidSendMessage should be return $invalid_number")
     public void shouldInvalidMessage(int invalid_number) {
         assertEquals(invalid_number, messenger.sendMessage(INVALID_SERVER, INVALID_MESSAGE));
 
