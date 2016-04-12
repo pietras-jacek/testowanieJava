@@ -20,7 +20,7 @@ import jbehave.messenger.Messenger;
 
 public class MessageAppTest {
 
-    private final String VALID_SERVER = "inf.ug.edu.pl";
+//    private final String VALID_SERVER = "inf.ug.edu.pl";
 //    private final String INVALID_SERVER = "inf.ug.edu.eu";
 //
 //    private final String VALID_MESSAGE = "some message";
@@ -63,17 +63,17 @@ public class MessageAppTest {
     
     
     
-//
-//    @When("try send a $valid_message to $valid_server")
-//    public void sendValidMessage(String valid_message, String valid_server) {
-//        validMessage = valid_message;
-//        validServer = valid_server;
-//    }
-//
-//    @Then("ValidSendMessage should return $vallid_number")
-//    public void shouldValidMessage(int valid_number) {
-//        assertEquals(valid_number, msg.sendMessage(validServer, validMessage));
-//    }
+
+    @When("try send a $valid_message to $valid_server")
+    public void sendValidMessage(String valid_message, String valid_server) {
+        validMessage =valid_message;
+        validServer = valid_server;
+    }
+
+    @Then("ValidSendMessage should return $vallid_number")
+    public void shouldValidMessage(int valid_number) {
+        assertEquals(valid_number, msg.sendMessage(validServer, validMessage));
+    }
 
     @When("try sending a $invalid_message to $invalid_server")
     public void sendInvalidMessage(String invalid_message, String invalid_server) {
