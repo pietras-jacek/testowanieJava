@@ -20,15 +20,15 @@ import jbehave.messenger.Messenger;
 
 public class MessageAppTest {
 
-//    private final String VALID_SERVER = "inf.ug.edu.pl";
-//    private final String INVALID_SERVER = "inf.ug.edu.eu";
-//
-//    private final String VALID_MESSAGE = "some message";
-//    private final String INVALID_MESSAGE = "ab";
+    private final String VALID_SERVER = "inf.ug.edu.pl";
+    private final String INVALID_SERVER = "inf.ug.edu.eu";
+
+    private final String VALID_MESSAGE = "some message";
+    private final String INVALID_MESSAGE = "ab";
 
     private static String invalidServer;
     private static String validServer;
-    
+
     private static String invalidMessage;
     private static String validMessage;
 
@@ -60,30 +60,22 @@ public class MessageAppTest {
     public void shouldInvalid(int invalid_server) {
         assertEquals(invalid_server, msg.testConnection(invalidServer));
     }
-    
-    
-    
 
-    @When("try send a $valid_message to $valid_server")
-    public void sendValidMessage(String valid_message, String valid_server) {
-        validMessage =valid_message;
-        validServer = valid_server;
+
+    @When("sending valid message")
+    public void sendingValidMessage() {
+        validMessage = VALID_MESSAGE;
     }
 
-    @Then("ValidSendMessage should return $vallid_number")
-    public void shouldValidMessage(int valid_number) {
-        assertEquals(valid_number, msg.sendMessage(validServer, validMessage));
+    @When("sending invalid message")
+    public void sendingInvalidMessage() {
+        invalidMessage = INVALID_MESSAGE;
     }
 
-    @When("try sending a $invalid_message to $invalid_server")
-    public void sendInvalidMessage(String invalid_message, String invalid_server) {
-        invalidMessage = invalid_message;
-        invalidServer = invalid_server;
-    }
-
-    @Then("InvalidSendMessage should be return $invalid_number")
-    public void shouldInvalidMessage(int invalid_number) {
-        assertEquals(invalid_number, msg.sendMessage(invalidServer, invalidMessage));
+    @Then("sendMessage should return $r1 or $r2")
+    public void checkSendMessageResult(int r1, int r2) {
+        assertThat(msg.sendMessage(VALID_SERVER, invalidMessage), 
+                either(equalTo(r1)).or(equalTo(r2)));
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.seleniumdemo;
+package com.example.wej02;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -18,7 +18,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-
 public class SomeSiteTest {
 
 	private static WebDriver driver;
@@ -27,32 +26,31 @@ public class SomeSiteTest {
 	@BeforeClass
 	public static void driverSetup() {
 		// ChromeDrirver, FireforxDriver, ...
-//                System.setProperty("webdriver.chrome.driver", 
-//                        "\\C:\\Users\\Dom\\Desktop\\chromedriver.exe");
+
 		System.setProperty("webdriver.chrome.driver", "/home/PJWSTK/s10146/Pulpit/chromedriver");
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	@Test
-	public void homePage(){
+	public void homePage() {
 		driver.get("http://www.teleman.pl");
-		
+
 		element = driver.findElement(By.linkText("Polsat"));
 		assertNotNull(element);
 	}
-	
+
 	@Test
-	public void polsatPage(){
+	public void polsatPage() {
 		driver.get("http://www.teleman.pl/");
 		driver.findElement(By.linkText("Polsat")).click();
 		element = driver.findElement(By.linkText("Polsat"));
-		File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-	    assertNotNull(screenshot);
+		File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		assertNotNull(screenshot);
 
 		try {
 			FileUtils.copyFile(screenshot, new File("/home/PJWSTK/s10146/Pobrane/polsat.png"));
-//                        FileUtils.copyFile(screenshot, new File("\\C:\\Users\\Dom\\Desktop\\polsat.png"));
+
 		} catch (IOException e) {
 			e.printStackTrace();
 			assertTrue(false);
