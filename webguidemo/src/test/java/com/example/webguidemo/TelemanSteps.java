@@ -29,6 +29,17 @@ public class TelemanSteps {
     public void sportPageIsShown(){
 //       assertEquals("Sport w Programie TV - Program telewizyjny Teleman.pl", pages.sport().getTitle());
        assertEquals("Selenium Framework | Add Extensions", pages.extension().getTitle());
+    }
+    
+    @When("user write a text on text area")
+    public void userTypeText(){      
+        pages.home().textAreaCheck();
+    }
+    
+    @Then("input text has a value")
+    public void textShown(){
+       assertEquals("This is a text box", pages.extension().findElement(By.id("vfb-9")).getAttribute("value"));
+       
     }	
 
 }

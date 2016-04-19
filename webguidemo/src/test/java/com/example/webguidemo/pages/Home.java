@@ -26,4 +26,8 @@ public class Home extends WebDriverPage {
 		findElement(By.linkText(EXTENSION_LINK_TEXT)).click();
 	}
 	
+	public void textAreaCheck() {
+		findElement(By.id("vfb-9")).sendKeys("");
+	}
+	
 }

@@ -1,5 +1,11 @@
 Scenario: User searches for a single step
  
 Given user is on Home page
+
+When user write a text on text area
+Then input text has a value
+
+
 When user opens a link
-Extension page is shown
+Then Extension page is shown
+
