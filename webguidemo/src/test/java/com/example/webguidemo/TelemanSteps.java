@@ -40,6 +40,16 @@ public class TelemanSteps {
     public void textShown(){
        assertEquals("This is a text box", pages.extension().findElement(By.id("vfb-9")).getAttribute("value"));
        
-    }	
-
+    }
+    
+    @When("user mark radio button")
+    public void markRadioButton() {
+    	pages.home().radioButtonCheck();
+    	
+    }
+    
+    @Then("radio button is marked")
+    public void radioButtonMarked() {
+    	assertTrue(pages.home().findElement(By.id("vfb-7-1")).isSelected());
+    }
 }

@@ -30,4 +30,8 @@ public class Home extends WebDriverPage {
 		findElement(By.id("vfb-9")).sendKeys("");
 	}
 	
+	public void radioButtonCheck() {
+		findElement(By.id("vfb-7-1")).click();
+	}
+	
 }
