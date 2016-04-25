@@ -2,7 +2,7 @@ package com.example.webguidemo;
 
 import org.jbehave.web.selenium.WebDriverProvider;
 
-import com.example.webguidemo.pages.Extension;
+import com.example.webguidemo.pages.Post;
 import com.example.webguidemo.pages.Home;
 
 public class Pages {
@@ -11,7 +11,7 @@ public class Pages {
 	
 	//Pages
 	private Home home;
-	private Extension extension;
+	private Post post;
 	// ...
 
 	public Pages(WebDriverProvider driverProvider) {
@@ -26,11 +26,11 @@ public class Pages {
 		return home;
 	}
 	
-	public Extension extension(){
-		if (extension == null) {
-			extension = new Extension(driverProvider);
+	public Post post(){
+		if (post == null) {
+			post = new Post(driverProvider);
 		}
-		return extension;
+		return post;
 	}
 	
 }
