@@ -66,6 +66,15 @@ public class PostSteps {
     public void postBoxPageIsShown() {
         assertEquals("PocztaWP - 1 nowych", pages.post().getTitle());
     }
+    
+    @When("user click log out button")
+    public void userLogOut() {
+        pages.post().clickLogOut();
+    }
+    @Then("LogOut message is shown")
+    public void logOutMessageisShown() {
+        assertEquals("Wylogowano z poczty", pages.post().getTitle());
+    }
 
     @Then("error in log in page shown $error_message")
     public void postLoginPageErrorIsShown(String error_message) {

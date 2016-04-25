@@ -13,3 +13,6 @@ Then error in log in page shown Niestety podany login lub hasło jest błędne (
 
 When user write kowalski_jan91 and Test12345 in the input
 Then Post box page is shown
+
+When user click log out button
+Then LogOut message is shown

@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 public class Post extends WebDriverPage {
 
     private final static String SUBMIT_BUTTON = "//*[@id=\"btnSubmit\"]";
+    private final static String LOGOUT_BUTTON = "//*[@id=\"buttonLogout\"]";
     private final static String ERROR_MESSAGE = "#loginForm > section > fieldset.row.error > small";
     private final static String ERROR_LOGIN_MESSAGE = "#loginForm > div.szary.error > h1";
     private final static String LOGIN_USERNAME = "//*[@id=\"login\"]";
@@ -42,5 +43,9 @@ public class Post extends WebDriverPage {
     
     public WebElement findPasswordField() {
         return findElement(By.xpath(LOGIN_PASSWORD));
+    }
+    
+    public void clickLogOut() {
+        findElement(By.xpath(LOGOUT_BUTTON)).click();
     }
 }
