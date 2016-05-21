@@ -1,9 +1,31 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Simple Service</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+    <script>
+    
+    $(document).ready(function(){
+        $("#btn1").click(function(){
+            alert("Text: " + $("#test").text());
+        });
+        $("#btn2").click(function(){
+            alert("HTML: " + $("#test").html());
+        });
+    });
+    
+    </script>
+    <title>Simple Service</title>
 </head>
+
 <body>
- <h1>The service is running!</h1>
+    <h1>The service is running!</h1>
+    <p id="test">
+        This is some <b>bold</b> text in a paragraph.
+    </p>
+
+    <button id="btn1">Show Text</button>
+    <button id="btn2">Show HTML</button>
 </body>
+
 </html>

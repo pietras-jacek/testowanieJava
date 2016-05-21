@@ -10,9 +10,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.example.restservicedemo.domain.Car;
+import com.example.restservicedemo.service.CarManager;
 
 @Path("car")
-public class CarFakeRESTService {	
+public class CarFakeRESTService {
+	
+	private CarManager cp = new CarManager();
 	
 	@GET
 	@Path("/{carId}")
