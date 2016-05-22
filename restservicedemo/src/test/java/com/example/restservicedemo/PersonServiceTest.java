@@ -4,6 +4,8 @@ import static com.jayway.restassured.RestAssured.delete;
 import static com.jayway.restassured.RestAssured.get;
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 
 import javax.ws.rs.core.MediaType;
@@ -42,6 +44,15 @@ public class PersonServiceTest {
 		
 		assertThat(PERSON_FIRST_NAME, equalToIgnoringCase(rPerson.getFirstName()));
 		
+	}
+	
+	@Test
+	public void getPerson() {
+	
+		get("/person/1").then().assertThat().body("firstName", equalTo("Jasiu"));
+		
+		Person aPerson = get("/person/1").as(Person.class);
+		assertThat(aPerson.getFirstName(), equalToIgnoringCase("Jasiu"));	
 	}
 	
 
