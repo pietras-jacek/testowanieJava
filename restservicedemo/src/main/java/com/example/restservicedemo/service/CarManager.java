@@ -85,7 +85,7 @@ public class CarManager {
 		return count;
 	}
 	
-	public List<Car> getallCars() {
+	public List<Car> getAllCars() {
 		List<Car> cars = new ArrayList<Car>();
 		
 		try {

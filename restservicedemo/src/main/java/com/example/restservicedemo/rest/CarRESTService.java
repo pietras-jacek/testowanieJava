@@ -1,6 +1,8 @@
 package com.example.restservicedemo.rest;
 
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -34,6 +36,14 @@ public class CarRESTService {
 		cm.addCar(car);
 		return Response.status(201).entity("Car").build();
 	}
+	
+	@GET
+	@Path("/all")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Car> getAllCars() {
+		List<Car> cars = cm.getAllCars();
+		return cars;
+}
 	
 	@GET
 	@Path("/test2")

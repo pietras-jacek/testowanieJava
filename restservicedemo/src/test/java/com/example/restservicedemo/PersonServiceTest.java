@@ -6,6 +6,7 @@ import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
+import static org.junit.Assert.assertNotNull;
 
 import javax.ws.rs.core.MediaType;
 
@@ -16,53 +17,53 @@ import com.example.restservicedemo.domain.Person;
 import com.jayway.restassured.RestAssured;
 
 public class PersonServiceTest {
-	
+
 	private static final String PERSON_FIRST_NAME = "Jasiu";
-	
+
 	@BeforeClass
-    public static void setUp(){
+	public static void setUp() {
 		RestAssured.baseURI = "http://localhost";
 		RestAssured.port = 8080;
-		RestAssured.basePath = "/restservicedemo/api";   	
-    }
-	
-	@Test
-	public void addPersons(){		
-		
-		delete("/person/").then().assertThat().statusCode(200);
-		
-		Person person = new Person(1L, PERSON_FIRST_NAME, 1976);
-		
-		given().
-	       contentType(MediaType.APPLICATION_JSON).
-	       body(person).
-	    when().	     
-	    post("/person/").then().assertThat().statusCode(201);
-				
-		Person rPerson = get("/person/1").as(Person.class);
-		
-		assertThat(PERSON_FIRST_NAME, equalToIgnoringCase(rPerson.getFirstName()));
-		
+		RestAssured.basePath = "/restservicedemo/api";
 	}
-	
+
+	@Test
+	public void addPersons() {
+
+		delete("/person/").then().assertThat().statusCode(200);
+
+		Person person = new Person(1L, PERSON_FIRST_NAME, 1976);
+
+		given().contentType(MediaType.APPLICATION_JSON).body(person).when().post("/person/").then().assertThat()
+				.statusCode(201);
+
+		Person rPerson = get("/person/1").as(Person.class);
+
+		assertThat(PERSON_FIRST_NAME, equalToIgnoringCase(rPerson.getFirstName()));
+
+	}
+
 	@Test
 	public void getPerson() {
-		
+
 		delete("/person/").then().assertThat().statusCode(200);
-		
+
 		Person person = new Person(1L, PERSON_FIRST_NAME, 1976);
-		
-		given().
-	       contentType(MediaType.APPLICATION_JSON).
-	       body(person).
-	    when().	     
-	    post("/person/").then().assertThat().statusCode(201);
-			
+
+		given().contentType(MediaType.APPLICATION_JSON).body(person).when().post("/person/").then().assertThat()
+				.statusCode(201);
+
 		get("/person/1").then().assertThat().body("firstName", equalTo("Jasiu"));
-		
+
 		Person aPerson = get("/person/1").as(Person.class);
-		assertThat(aPerson.getFirstName(), equalToIgnoringCase("Jasiu"));	
+		assertThat(aPerson.getFirstName(), equalToIgnoringCase("Jasiu"));
 	}
+
+	@Test
+	public void getAllPersons() {
+		String persons = get("/person/all").asString();
+		assertNotNull(persons);
 	
+	}
 
 }
