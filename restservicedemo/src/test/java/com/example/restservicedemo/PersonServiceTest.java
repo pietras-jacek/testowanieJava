@@ -4,7 +4,6 @@ import static com.jayway.restassured.RestAssured.delete;
 import static com.jayway.restassured.RestAssured.get;
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 
@@ -48,7 +47,17 @@ public class PersonServiceTest {
 	
 	@Test
 	public void getPerson() {
-	
+		
+		delete("/person/").then().assertThat().statusCode(200);
+		
+		Person person = new Person(1L, PERSON_FIRST_NAME, 1976);
+		
+		given().
+	       contentType(MediaType.APPLICATION_JSON).
+	       body(person).
+	    when().	     
+	    post("/person/").then().assertThat().statusCode(201);
+			
 		get("/person/1").then().assertThat().body("firstName", equalTo("Jasiu"));
 		
 		Person aPerson = get("/person/1").as(Person.class);

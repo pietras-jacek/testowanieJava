@@ -37,7 +37,7 @@ public class CarServiceTest {
 	}
 	
 	@Test
-	public void addCar(){
+	public void addCar() {
 		
 		Car aCar = new Car(2, "Ford", "Fiesta", 2011);
 		given().
