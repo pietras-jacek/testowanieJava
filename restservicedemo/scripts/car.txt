@@ -1,0 +1,22 @@
+﻿INSERT INTO "PUBLIC"."CAR" ("ID", "MAKE", "MODEL", "YOP") 
+VALUES (2,'Porsche', '911', 2015),
+(3,'Aston Martin', 'DB 9', 2016),
+(4,'Citroën', '2CV', 1948),
+(5, 'Hillman', 'Minx Magnificent', 1950),
+(6, 'Ford', 'Fiesta', 1993),
+(7, 'Opel', 'Insygnia', 2012),
+(8, 'Seat', 'Leon', 2013),
+(9, 'Chevrolet', 'Corvette', 1955),
+(10, 'Ford', 'Thunderbird', 1955),
+(11, 'BMW', 'M5', 2014),
+(12, 'Chevrolet', 'Corvette', 1957),
+(13, 'BMW', '600', 1957),
+(14, 'Audi', 'RS6', 2013),
+(15, 'BMW', '600', 1958),
+(16, 'Mercedes', 'AMG GT', 2015),
+(17, 'Ford', 'MUSTANG GT', 2011),
+(18, 'Chevrolet', 'Corvette', 1959),
+(19, 'BMW', '600', 1959),
+(20, 'Lamborghini', 'Gallardo GT3 FL2',  2014),
+(21, 'Ferrari', 'F430', 2014)
+
