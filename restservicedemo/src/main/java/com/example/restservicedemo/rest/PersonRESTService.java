@@ -1,7 +1,6 @@
 package com.example.restservicedemo.rest;
 
 import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -37,12 +36,13 @@ public class PersonRESTService {
 	}
 	
 	@GET
-	@Path("/all")
+	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Person> getAllPersons() {
 		List<Person> persons = pm.getAllPersons();
 		return persons;
 }
+	
 	
 	@GET
 	@Path("/test")

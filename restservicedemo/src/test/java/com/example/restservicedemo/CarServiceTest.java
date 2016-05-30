@@ -1,13 +1,16 @@
 package com.example.restservicedemo;
 
+
 import static com.jayway.restassured.RestAssured.delete;
 import static com.jayway.restassured.RestAssured.get;
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
@@ -15,52 +18,72 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.example.restservicedemo.domain.Car;
+import com.example.restservicedemo.domain.Person;
+import com.example.restservicedemo.service.CarManager;
+import com.example.restservicedemo.service.PersonManager;
 import com.jayway.restassured.RestAssured;
 
 public class CarServiceTest {
 
 	public static final String CAR_MAKE = "Opel";
-	public static final String CAR_MODEL = "Astra";
+	
+	private static Person person;
 
 	@BeforeClass
 	public static void setUp() {
 		RestAssured.baseURI = "http://localhost";
 		RestAssured.port = 8080;
 		RestAssured.basePath = "/restservicedemo/api";
+		
+		person = new Person(2, "Aleksander", 1985);
+		
+		given().
+		contentType("application/json").
+		body(person).
+		when().post("/person/").
+		then().assertThat().statusCode(201);
 	}
 
-	@Test
-	public void getCar() {
-		get("/car/0").then().assertThat().body("model", equalTo("Corsa"));
-
-		Car aCar = get("/car/0").as(Car.class);
-		assertThat(aCar.getMake(), equalToIgnoringCase("Opel"));
-	}
-
-	@Test
-	public void addCar() {
-
-		Car aCar = new Car(2, "Ford", "Fiesta", 2011);
-		given().contentType("application/json").body(aCar).when().post("/car/").then().assertThat().statusCode(201)
-				.body(containsString("Car saved:"));
-	}
 
 	@Test
 	public void addCars() {
-		delete("/Car/").then().assertThat().statusCode(200);
+		delete("/car/").then().assertThat().statusCode(200);
 
-		Car car = new Car(1L, CAR_MAKE, CAR_MODEL, 2000);
+		Car car = new Car(1, CAR_MAKE, "Corsa", 2000, person);
 
-		given().contentType(MediaType.APPLICATION_JSON).body(car).when().post("/Car/").then().assertThat()
+		given().contentType("application/json").
+		body(car).when().post("/car/").then().assertThat()
 				.statusCode(201);
 
-		Car rCar = get("/Car/1").as(Car.class);
+		Car rCar = get("/car/1").as(Car.class);
 
 		assertThat(CAR_MAKE, equalToIgnoringCase(rCar.getMake()));
-		assertThat(CAR_MODEL, equalToIgnoringCase(rCar.getModel()));
+		assertThat("Corsa", equalToIgnoringCase(rCar.getModel()));
 
 	}
+	
+	@Test
+	public void getPerson() {
 
+		delete("/car/").then().assertThat().statusCode(200);
+
+		Car car = new Car(1, CAR_MAKE, "Astra", 1976, person);
+
+		given().contentType(MediaType.APPLICATION_JSON).body(car).when().post("/car/").then().assertThat()
+				.statusCode(201);
+
+		get("/car/1").then().assertThat().body("make", equalTo("Opel"));
+
+		Car rCar = get("/car/1").as(Car.class);
+
+		assertThat(CAR_MAKE, equalToIgnoringCase(rCar.getMake()));
+		assertThat(rCar.getMake(), equalToIgnoringCase("Opel"));
+
+	}
+	
+	
+	
+	
 	@Test
 	public void getAllCars() {
 		String cars = get("/car/all/").asString();

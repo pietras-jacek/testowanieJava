@@ -2,7 +2,6 @@ package com.example.restservicedemo.rest;
 
 
 import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -14,19 +13,34 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.example.restservicedemo.domain.Car;
+import com.example.restservicedemo.domain.Person;
 import com.example.restservicedemo.service.CarManager;
+import com.example.restservicedemo.service.PersonManager;
 
-@Path("Car")
+@Path("car")
 public class CarRESTService {
 	
 	private CarManager cm = new CarManager();
+	private PersonManager pm = new PersonManager();
 	
 	@GET
 	@Path("/{carId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Car getCar(@PathParam("carId") Long id) {
-		Car c = cm.getCar(id);
-		return c;
+		Car c = new Car();
+		c.setId(id);
+		Car car = cm.getCarWithOwner(c);
+		return car;
+	}
+	
+	@GET
+	@Path("/carOwner/{ownerId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Car> getCarsOwner(@PathParam("ownerId") Long id) {
+		Person owner = pm.getPerson(id);
+		
+		List<Car> car = cm.getOwnerCars(owner);
+		return car;
 	}
 	
 	@POST
@@ -38,7 +52,7 @@ public class CarRESTService {
 	}
 	
 	@GET
-	@Path("/all")
+	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Car> getAllCars() {
 		List<Car> cars = cm.getAllCars();
