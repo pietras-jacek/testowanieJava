@@ -54,7 +54,7 @@
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="JDBC Request" enabled="true">
           <stringProp name="dataSource">HSQLDBPool</stringProp>
           <stringProp name="query">INSERT INTO PERSON VALUES (${index}, &apos;Jan&apos;, 1960)
-INSERT INTO CAR VALUES (${index}, &apos;Ford&apos;, &apos;Mustang&apos;, 1964)
+INSERT INTO CAR VALUES (${index}, &apos;Ford&apos;, &apos;Mustang&apos;, 1964, ${index})
 </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
@@ -207,7 +207,7 @@ INSERT INTO CAR VALUES (${index}, &apos;Ford&apos;, &apos;Mustang&apos;, 1964)
           <stringProp name="dataSource">HSQLDBPool</stringProp>
           <stringProp name="query">SELECT * FROM &quot;PUBLIC&quot;.&quot;PERSON&quot;
 INNER JOIN &quot;PUBLIC&quot;.&quot;CAR&quot;
-ON &quot;PUBLIC&quot;.&quot;PERSON&quot;.&quot;ID&quot; = &quot;PUBLIC&quot;.&quot;CAR&quot;.&quot;ID&quot;</stringProp>
+ON &quot;PUBLIC&quot;.&quot;PERSON&quot;.&quot;P_ID&quot; = &quot;PUBLIC&quot;.&quot;CAR&quot;.&quot;C_ID&quot;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="queryTimeout"></stringProp>

@@ -36,7 +36,7 @@ public class PersonRESTService {
 	}
 	
 	@GET
-	@Path("/")
+	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Person> getAllPersons() {
 		List<Person> persons = pm.getAllPersons();

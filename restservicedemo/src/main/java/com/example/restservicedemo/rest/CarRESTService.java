@@ -52,12 +52,13 @@ public class CarRESTService {
 	}
 	
 	@GET
-	@Path("/")
+	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Car> getAllCars() {
 		List<Car> cars = cm.getAllCars();
 		return cars;
 }
+
 	
 	@GET
 	@Path("/test2")
