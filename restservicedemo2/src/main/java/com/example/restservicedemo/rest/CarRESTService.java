@@ -38,6 +38,7 @@ public class CarRESTService {
 		c.setId(id);
 		Car car = pm.getCarWithOwner(c);
 		return car;
+		
 	}
 	
 	@GET
@@ -63,6 +64,14 @@ public class CarRESTService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addCarWithId(Car car) {
 		pm.addCarWithId(car);
+		return Response.status(201).entity("Car").build();
+	}
+	
+	@POST
+	@Path("/addOwner")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addCarWithIdOwner(Car car) {
+		pm.addCarWithIdOwner(car);
 		return Response.status(201).entity("Car").build();
 	}
 	

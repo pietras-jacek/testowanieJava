@@ -23,11 +23,12 @@ import com.example.restservicedemo.domain.Car;
 import com.example.restservicedemo.domain.CarResponse;
 import com.example.restservicedemo.domain.Person;
 import com.example.restservicedemo.domain.PersonsResponse;
+import com.example.restservicedemo.service.PersonManager;
 import com.jayway.restassured.RestAssured;
 
 
 public class CarServiceTest {
-	
+
 	private static final String CAR_MODEL = "Ford Mustang";
 	
 	@BeforeClass
@@ -73,6 +74,43 @@ public class CarServiceTest {
 	}
 	
 	@Test
+//	@Ignore
+	public void getCarWithOwner(){
+//		delete("/car/").then().assertThat().statusCode(200);
+//		delete("/person/").then().assertThat().statusCode(200);
+		
+		Person person = new Person(2, "Wojciech", 1989);
+		
+		Car car = new Car(2,"Fiat 500", 2014, person);
+
+		given()
+			.contentType(MediaType.APPLICATION_JSON)
+			.body(person)
+		.when()
+			.post("/person/").then().assertThat().statusCode(201);
+		given()
+			.contentType(MediaType.APPLICATION_JSON)
+			.body(car)
+		.when()
+			.post("/car/addOwner/").then().assertThat().statusCode(201);
+		
+		given()
+		.when()
+			.get("/car/carWithOwner/2")
+		.then()
+			.body("id", equalTo("2"))
+			.body("model", equalTo("Fiat 500"))
+			.body("owner.id", equalTo("2"))
+			.body("owner.firstName", equalTo("Wojciech"))
+			.body("owner.yob", equalTo("1989"))
+			.body("yop", equalTo("2014"));
+		
+		delete("/car/").then().assertThat().statusCode(200);
+		delete("/person/").then().assertThat().statusCode(200);
+		
+	}
+	
+	@Test
 	public void AgetAllCars(){
 		String cars = get("/car/all/").asString();
 
@@ -80,7 +118,7 @@ public class CarServiceTest {
 	}
 	
 	@Test
-	@Ignore
+//	@Ignore
 	public void clearCars() {
 		delete("/car").then().assertThat().statusCode(200);
 		given()

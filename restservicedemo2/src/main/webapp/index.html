@@ -47,11 +47,10 @@
 						success : function(data) {
 							console.log(data);
 							tableCars
-									.append('<table border = "1"><tr><th>ID</th><th>Make</th><th>Model</th><th>YOP</th><th>Owner</th></tr></table>');
+									.append('<table border = "1"><tr><th>ID</th><th>Model</th><th>YOP</th><th>Owner</th></tr></table>');
 							var html = "";
 							if (typeof (data.car.length) !== 'number') {
 								html += '<tr>' + '<td>' + data.car.id + '</td>'
-										+ '<td>' + data.car.make + '</td>'
 										+ '<td>' + data.car.model + '</td>'
 										+ '<td>' + data.car.yop + '</td>'
 										+ '<td>' + data.car.owner.id + '</td>'
@@ -59,7 +58,6 @@
 							}
 							for (var i = 0; i < data.car.length; i++) {
 								html += '<tr>' + '<td>' + data.car[i].id
-										+ '</td>' + '<td>' + data.car[i].make
 										+ '</td>' + '<td>' + data.car[i].model
 										+ '</td>' + '<td>' + data.car[i].yop
 										+ '</td>' + '<td>'

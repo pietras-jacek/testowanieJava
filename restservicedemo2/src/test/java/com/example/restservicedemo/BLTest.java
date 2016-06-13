@@ -49,13 +49,11 @@ public class BLTest {
 		assertTrue(persons.size() > 0);
 		
 
-		Car c = new Car();
+		Car c = new Car(1, "Opel Astra", 2005, person);
 		c.setModel("Opel Astra");
 		c.setYop(2005);
 		c.setOwner(person);
-		assertEquals(1, pm.addCar(c));
-		c.setOwner(person);
-		
+		assertEquals(1, pm.addCarWithId(c));
 		
 		Person owner = persons.get(0);
 		assertEquals(3, owner.getId());
@@ -64,7 +62,7 @@ public class BLTest {
 		assertTrue(cars.size() > 0);
 		Car carOwner = cars.get(0);
 		
-		
+		pm.sellCar(carOwner, owner);
 		Car rCar = pm.getCarWithOwner(carOwner);
 		
 		assertEquals(owner.getFirstName(), rCar.getOwner().getFirstName());

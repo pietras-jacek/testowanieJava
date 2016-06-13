@@ -37,6 +37,7 @@ public class PersonManager {
 	private PreparedStatement getAllCarsStmt;
 	private PreparedStatement deleteAllCarsStmt;
 	private PreparedStatement getCarByIdStmt;
+	private PreparedStatement addCarWithIdOwnerStmt;
 
 	private Statement statement;
 
@@ -91,6 +92,8 @@ public class PersonManager {
 			getCarByIdStmt = connection.prepareStatement("SELECT c_id, model, yop FROM Car where c_id = ?");
 			
 			addCarIdStmt = connection.prepareStatement("INSERT INTO Car (c_id, model, yop) VALUES (?, ?, ?)");
+			
+			addCarWithIdOwnerStmt = connection.prepareStatement("INSERT INTO Car (c_id, model, yop, owner_id) VALUES (?, ?, ?, ?)");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -196,6 +199,22 @@ public class PersonManager {
 			count = addCarIdStmt.executeUpdate();
 
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	public int addCarWithIdOwner(Car car) {
+		int count = 0;
+		
+		try {
+			addCarWithIdOwnerStmt.setLong(1, car.getId());
+			addCarWithIdOwnerStmt.setString(2, car.getModel());
+			addCarWithIdOwnerStmt.setInt(3, car.getYop());
+			addCarWithIdOwnerStmt.setLong(4, car.getOwner().getId());
+			
+			count = addCarWithIdOwnerStmt.executeUpdate();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return count;

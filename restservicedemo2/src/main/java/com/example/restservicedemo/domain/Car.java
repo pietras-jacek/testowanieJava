@@ -19,8 +19,18 @@ public class Car {
 	}
 	
 	
-	public Car() {
+	public Car(long id, String model, int yop, Person person) { 
+		super();
+		this.id = id;
+		this.model = model;
+		this.yop = yop;
+		this.owner = person;
 	}
+
+	public Car() {
+		
+	}
+
 
 	public long getId() {
 		return id;
