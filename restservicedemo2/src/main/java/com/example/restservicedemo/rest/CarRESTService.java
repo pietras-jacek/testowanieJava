@@ -49,6 +49,14 @@ public class CarRESTService {
 		return cars;
 	}
 	
+	@GET
+	@Path("/allCars")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Car> getAllOwnerCars() {
+		List<Car> cars = pm.getAllCarsWithOwner();
+		return cars;
+	}
+	
 
 	
 	@POST

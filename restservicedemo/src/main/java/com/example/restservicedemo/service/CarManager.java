@@ -114,9 +114,11 @@ public class CarManager {
 				c.setMake(rs.getString("make"));
 				c.setModel(rs.getString("model"));
 				c.setYop(rs.getInt("yop"));
+				
 				Person owner = new Person();
 				owner.setId(rs.getLong("owner_id"));
 				c.setOwner(owner);
+				
 				cars.add(c);
 			}
  		} catch (SQLException e) {

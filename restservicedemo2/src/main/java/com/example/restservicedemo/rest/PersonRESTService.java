@@ -76,5 +76,12 @@ public class PersonRESTService {
 		pm.clearPersons();
 		return Response.status(200).build();
 	}
+	
+	@DELETE
+	@Path("/clear/{personId}")
+	public Response clearPerson(@PathParam("personId") Long id) {
+		pm.clearPerson(id);
+		return Response.status(200).build();
+	}
 
 }

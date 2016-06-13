@@ -43,7 +43,7 @@
 			$
 					.ajax({
 						method : "GET",
-						url : "http://localhost:8080/restservicedemo/api/car/all",
+						url : "http://localhost:8080/restservicedemo/api/car/allCars",
 						success : function(data) {
 							console.log(data);
 							tableCars
@@ -72,6 +72,22 @@
 
 		getPersons();
 		getCars();
+		
+		$("#btnSave").click(function() {
+		    $.ajax({
+		    	method: 'POST',
+		        url: 'http://localhost:8080/restservicedemo/api/person',
+		        contentType: 'application/json',
+		        dataType: 'json',
+		        data: JSON.stringify({
+		        	id: $("#idPerson").val(), 
+		        	firstName: $("#name").val(), 
+		        	yob: $("#yob").val()
+		        }),
+		        success: function (data) { }
+		    });
+		});
+
 
 	});
 </script>
@@ -84,5 +100,39 @@
 	<div class="tablePersons"></div>
 	<br>
 	<div class="tableCars"></div>
+	<br>
+	<br>
+	<div class="entire">
+	 	<div class="page-header"><h1>Person form:</h1></div>
+	 		<form class="form-horizontal" id="formPerson">
+  			    	<div class="form-group">
+  			    		<label for="idCar">P_ID</label>
+  			    		<div>
+  			    			<input type="number" id="idPerson" placeholder="ID" required>
+  			    		</div>
+  			    	</div>
+
+  			    	<div class="form-group">
+  			    		<label for="typ">First name</label>
+  			    		<div>
+  			    			<input type="text" id="name" placeholder="Name" required>
+  			    		</div>
+  			    	</div>
+
+  			    	<div class="form-group">
+  			    		<label for="size" >Year of birth</label>
+  			    		<div>
+  			    			<input type="number" id="yob" placeholder="Year of birth" required>
+  			    		</div>
+  			    	</div>
+			    	
+
+  			    	<div>
+  			    		<button type="submit" value="Save" id="btnSave">Add person</button> 
+  			    		<button type="reset">Reset</button>
+  			    	</div>
+
+  			</form>
+  		</div>
 </body>
 </html>

@@ -29,6 +29,7 @@ public class PersonManager {
 	private PreparedStatement sellCarStmt;
 
 	private PreparedStatement deleteAllPersonsStmt;
+	private PreparedStatement deletePersonStmt;
 	private PreparedStatement getAllPersonsStmt;
 	private PreparedStatement getPersonByIdStmt;
 
@@ -38,6 +39,14 @@ public class PersonManager {
 	private PreparedStatement deleteAllCarsStmt;
 	private PreparedStatement getCarByIdStmt;
 	private PreparedStatement addCarWithIdOwnerStmt;
+	
+	private PreparedStatement createPersonTableStmt;
+	private PreparedStatement dropPersonTableStmt;
+	private PreparedStatement createCarTableStmt;
+	private PreparedStatement dropCarTableStmt;
+	
+	private PreparedStatement getAllCarsWithOwnerStmt;
+	
 
 	private Statement statement;
 
@@ -72,6 +81,7 @@ public class PersonManager {
 
 			addPersonStmt = connection.prepareStatement("INSERT INTO Person (p_id, name, yob) VALUES (?, ?, ?)");
 			deleteAllPersonsStmt = connection.prepareStatement("DELETE FROM Person");
+			deletePersonStmt = connection.prepareStatement("DELETE FROM Person where p_id = ?");
 			getAllPersonsStmt = connection.prepareStatement("SELECT p_id, name, yob FROM Person");
 			getPersonByIdStmt = connection.prepareStatement("SELECT p_id, name, yob FROM Person where p_id = ?");
 
@@ -94,6 +104,15 @@ public class PersonManager {
 			addCarIdStmt = connection.prepareStatement("INSERT INTO Car (c_id, model, yop) VALUES (?, ?, ?)");
 			
 			addCarWithIdOwnerStmt = connection.prepareStatement("INSERT INTO Car (c_id, model, yop, owner_id) VALUES (?, ?, ?, ?)");
+			
+			createPersonTableStmt = connection.prepareStatement(CREATE_TABLE_PERSON);
+			dropPersonTableStmt = connection.prepareStatement("DROP TABLE Person");
+			
+			createCarTableStmt = connection.prepareStatement(CREATE_TABLE_CAR);
+			dropCarTableStmt = connection.prepareStatement("DROP TABLE Car");
+			
+			getAllCarsWithOwnerStmt = connection.prepareStatement("SELECT c_id, model, yop, owner_id FROM Car");
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -111,6 +130,16 @@ public class PersonManager {
 			e.printStackTrace();
 		}
 	}
+	
+	public void clearPerson(Long id) {
+        try {
+        	deletePersonStmt.setLong(1, id);
+            deletePersonStmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 	public int addPerson(Person person) {
 		int count = 0;
@@ -347,5 +376,62 @@ public class PersonManager {
 		return cars;
 	}
 	
+	public List<Car> getAllCarsWithOwner() {
+		
+		List<Car> cars = new ArrayList<Car>();
 
+		try {
+			ResultSet rs = getAllCarsWithOwnerStmt.executeQuery();
+
+			while (rs.next()) {
+				Car c = new Car();
+				c.setId(rs.getInt("c_id"));
+				c.setModel(rs.getString("model"));
+				c.setYop(rs.getInt("yop"));
+				
+				Person owner = new Person();
+				owner.setId(rs.getLong("owner_id"));
+				c.setOwner(owner);
+				
+				cars.add(c);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cars;
+	}
+	
+	public void createPersonTable() {
+		try {
+			createPersonTableStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void dropPersonTable() {
+		try {
+			dropPersonTableStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void createCarTable() {
+		try {
+			createCarTableStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void dropCarTable() {
+		try {
+			dropCarTableStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
