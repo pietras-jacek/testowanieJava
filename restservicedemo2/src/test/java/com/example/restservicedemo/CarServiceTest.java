@@ -20,6 +20,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import com.example.restservicedemo.domain.Car;
+import com.example.restservicedemo.domain.CarResponse;
 import com.example.restservicedemo.domain.Person;
 import com.example.restservicedemo.domain.PersonsResponse;
 import com.jayway.restassured.RestAssured;
@@ -43,38 +44,53 @@ public class CarServiceTest {
 		delete("/car/").then().assertThat().statusCode(200);
 		
 		Car Car = new Car(1, CAR_MODEL, 2011);
-		given().
-		       contentType(MediaType.APPLICATION_JSON).
-		       body(Car).
-		when().	     
-		post("/car/").then().assertThat().
-		statusCode(201);
+		given().contentType(MediaType.APPLICATION_JSON).body(Car).when().post("/car/add/").then().assertThat()
+		.statusCode(201);
 		
-//		Car rCar = get("/car/1").as(Car.class);
-//		
-//		assertThat(CAR_MODEL, equalToIgnoringCase(rCar.getModel()));
+		Car rCar = get("/car/1").as(Car.class);
+		
+		assertThat(CAR_MODEL, equalToIgnoringCase(rCar.getModel()));
 		
 	}
 	
 	@Test
-	@Ignore
-	public void getAllCars(){
+	public void getCars(){		
+		
+		given().
+	       contentType(MediaType.APPLICATION_JSON).
+	    when().	     
+	    get("/car/").then().assertThat().statusCode(200);
+				
+		CarResponse rCar = get("/car/").as(CarResponse.class);
+		
+		List<Car> cars = rCar.getCar();
+		
+		assertEquals(2, cars.size());
+		
+		System.out.println(cars.get(1).getModel());
+		
+		
+	}
+	
+	@Test
+	public void AgetAllCars(){
 		String cars = get("/car/all/").asString();
 
 		assertNotNull(cars);
 	}
 	
-//	@Test
-//	public void clearCars() {
-//		delete("/car").then().assertThat().statusCode(200);
-//		given()
-//	       	.contentType(MediaType.APPLICATION_JSON)
-//	       	.body(Car.class)
-//	    .when()
-//	    .then()
-//	    	.body("", Matchers.hasSize(0));
-//		
-//	}
+	@Test
+	@Ignore
+	public void clearCars() {
+		delete("/car").then().assertThat().statusCode(200);
+		given()
+	       	.contentType(MediaType.APPLICATION_JSON)
+	       	.body(Car.class)
+	    .when()
+	    .then()
+	    	.body("", Matchers.hasSize(0));
+		
+	}
 	
 	
 		

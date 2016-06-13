@@ -1,5 +1,6 @@
 package com.example.restservicedemo.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -56,6 +57,30 @@ public class CarRESTService {
 		pm.addCar(car);
 		return Response.status(201).entity("Car").build();
 	}
+	
+	@POST
+	@Path("/add")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addCarWithId(Car car) {
+		pm.addCarWithId(car);
+		return Response.status(201).entity("Car").build();
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Car> getCars(){
+		Car c1 = new Car();
+		c1.setModel("Fiat Punto");
+		
+		Car c2 = new Car();
+		c2.setModel("Fiat 125");
+		
+        List<Car> cars = new ArrayList<Car>();
+        cars.add(c1);
+        cars.add(c2);
+		return cars;
+	}
+	
 	
 	@DELETE
 	public Response clearCars() {

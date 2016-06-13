@@ -54,6 +54,14 @@ public class PersonRESTService {
         persons.add(p2);
 		return persons;
 	}
+	
+	@GET
+	@Path("/all")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Person> getAllPersons() {
+		List<Person> persons = pm.getAllPersons();
+		return persons;
+}
 		
 	
 	@GET
