@@ -29,17 +29,16 @@ public class PersonRESTService {
 		Person p = pm.getPerson(id);
 		return p;
 	}
-	
-	
-	@GET
-	@Path("/car/{carId}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Car getCar(@PathParam("carId") Long id){
-		Car c = new Car();
-		c.setId(id);
-		Car car = pm.getCarWithOwner(c);
-		return car;
+	@POST
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addPerson(Person person){
+		pm.addPerson(person);
+		return Response.status(201).entity("Person").build(); 
 	}
+	
+	
+
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -55,15 +54,7 @@ public class PersonRESTService {
         persons.add(p2);
 		return persons;
 	}
-	
-	@POST
-	@Path("/")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addPerson(Person person){
-		pm.addPerson(person);
-		return Response.status(201).entity("Person").build(); 
-	}
-	
+		
 	
 	@GET
 	@Path("/test")

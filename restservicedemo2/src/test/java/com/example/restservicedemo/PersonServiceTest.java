@@ -32,7 +32,6 @@ public class PersonServiceTest {
     }
 	
 	@Test
-	@Ignore
 	public void addPersons(){		
 		
 		delete("/person/").then().assertThat().statusCode(200);
@@ -48,11 +47,11 @@ public class PersonServiceTest {
 		Person rPerson = get("/person/1").as(Person.class);
 		
 		assertThat(rPerson.getFirstName(), equalToIgnoringCase(PERSON_FIRST_NAME));
+
 		
 	}
 	
 	@Test
-	@Ignore
 	public void getPersons(){		
 		
 

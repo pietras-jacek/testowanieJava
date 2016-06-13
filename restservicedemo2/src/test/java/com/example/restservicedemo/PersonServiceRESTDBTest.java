@@ -55,6 +55,7 @@ public class PersonServiceRESTDBTest {
 	}
 
 	@Test
+	@Ignore
 	public void addPeson() throws Exception{
 	
 		Person aPerson = new Person("Ziutek", 2010);

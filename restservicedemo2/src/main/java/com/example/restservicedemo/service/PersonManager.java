@@ -34,6 +34,8 @@ public class PersonManager {
 	private PreparedStatement getAllPersonsWithCarsStmt;
 	private PreparedStatement getCarWithOwnerStmt;
 	private PreparedStatement getAllCarsStmt;
+	private PreparedStatement deleteAllCarsStmt;
+	private PreparedStatement getCarByIdStmt;
 
 	private Statement statement;
 
@@ -66,7 +68,7 @@ public class PersonManager {
 			if (!tableExists)
 				statement.executeUpdate(CREATE_TABLE_CAR);
 
-			addPersonStmt = connection.prepareStatement("INSERT INTO Person (name, yob) VALUES (?, ?)");
+			addPersonStmt = connection.prepareStatement("INSERT INTO Person (p_id, name, yob) VALUES (?, ?, ?)");
 			deleteAllPersonsStmt = connection.prepareStatement("DELETE FROM Person");
 			getAllPersonsStmt = connection.prepareStatement("SELECT p_id, name, yob FROM Person");
 			getPersonByIdStmt = connection.prepareStatement("SELECT p_id, name, yob FROM Person where p_id = ?");
@@ -82,6 +84,10 @@ public class PersonManager {
 					"SELECT p_id, name, yob, c_id, model, yop, owner_id FROM Person JOIN Car ON c_id = ?");
 
 			getAllCarsStmt = connection.prepareStatement("SELECT c_id, model, yop FROM Car");
+			
+			deleteAllCarsStmt = connection.prepareStatement("DELETE FROM Car");
+			
+			getCarByIdStmt = connection.prepareStatement("SELECT c_id, model, yop FROM Car where c_id = ?");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -103,8 +109,9 @@ public class PersonManager {
 	public int addPerson(Person person) {
 		int count = 0;
 		try {
-			addPersonStmt.setString(1, person.getFirstName());
-			addPersonStmt.setInt(2, person.getYob());
+			addPersonStmt.setLong(1, person.getId());
+			addPersonStmt.setString(2, person.getFirstName());
+			addPersonStmt.setInt(3, person.getYob());
 
 			count = addPersonStmt.executeUpdate();
 
@@ -153,6 +160,14 @@ public class PersonManager {
 
 		return p;
 	}
+	
+	public void clearCars() {
+		try {
+			deleteAllCarsStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public int addCar(Car car) {
 		int count = 0;
@@ -166,6 +181,26 @@ public class PersonManager {
 			e.printStackTrace();
 		}
 		return count;
+	}
+	
+	public Car getCar(Long id) {
+		Car c = new Car();
+		try {
+			getCarByIdStmt.setLong(1, id);
+			ResultSet rs = getCarByIdStmt.executeQuery();
+
+			while (rs.next()) {
+				c.setId(rs.getInt("c_id"));
+				c.setModel(rs.getString("model"));
+				c.setYop(rs.getInt("yop"));
+				break;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return c;
 	}
 
 	public Map<Person, List<Car>> getPersonWithCar() {
