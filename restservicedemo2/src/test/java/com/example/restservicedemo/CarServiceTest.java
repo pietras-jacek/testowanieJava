@@ -74,11 +74,8 @@ public class CarServiceTest {
 	}
 	
 	@Test
-//	@Ignore
 	public void getCarWithOwner(){
-//		delete("/car/").then().assertThat().statusCode(200);
-//		delete("/person/").then().assertThat().statusCode(200);
-		
+
 		Person person = new Person(2, "Wojciech", 1989);
 		
 		Car car = new Car(2,"Fiat 500", 2014, person);
@@ -113,7 +110,6 @@ public class CarServiceTest {
 	@Test
 	public void AgetAllCars(){
 		String cars = get("/car/all/").asString();
-
 		assertNotNull(cars);
 	}
 	
