@@ -90,7 +90,6 @@ public class PersonServiceRESTDBTest {
     }
     
     @Test
-//    @Ignore
 	public void deletePerson() throws Exception {
     	delete("/person/clear/3").then().assertThat().statusCode(200);
 		

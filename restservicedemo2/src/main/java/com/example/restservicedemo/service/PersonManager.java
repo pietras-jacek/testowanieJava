@@ -39,6 +39,7 @@ public class PersonManager {
 	private PreparedStatement deleteAllCarsStmt;
 	private PreparedStatement getCarByIdStmt;
 	private PreparedStatement addCarWithIdOwnerStmt;
+	private PreparedStatement deleteCarStmt;
 	
 	private PreparedStatement createPersonTableStmt;
 	private PreparedStatement dropPersonTableStmt;
@@ -98,6 +99,8 @@ public class PersonManager {
 			getAllCarsStmt = connection.prepareStatement("SELECT c_id, model, yop FROM Car");
 			
 			deleteAllCarsStmt = connection.prepareStatement("DELETE FROM Car");
+			
+			deleteCarStmt = connection.prepareStatement("DELETE FROM Car where c_id = ?");
 			
 			getCarByIdStmt = connection.prepareStatement("SELECT c_id, model, yop FROM Car where c_id = ?");
 			
@@ -203,6 +206,15 @@ public class PersonManager {
 			e.printStackTrace();
 		}
 	}
+	public void clearCar(Long id) {
+        try {
+        	deleteCarStmt.setLong(1, id);
+            deleteCarStmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 	public int addCar(Car car) {
 		int count = 0;

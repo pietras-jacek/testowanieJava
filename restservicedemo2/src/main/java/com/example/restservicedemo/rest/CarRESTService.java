@@ -104,5 +104,12 @@ public class CarRESTService {
 		pm.clearCars();
 		return Response.status(200).build();
 	}
+	
+	@DELETE
+	@Path("/clear/{carId}")
+	public Response clearCar(@PathParam("carId") Long id) {
+		pm.clearCar(id);
+		return Response.status(200).build();
+	}
 
 }

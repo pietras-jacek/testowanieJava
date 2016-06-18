@@ -94,6 +94,21 @@ public class CarServiceRESTDBTest {
         Assertion.assertEquals(expectedTable, actualTable);
     }
     
+    @Test
+	public void deletePerson() throws Exception {
+  	delete("/car/clear/3").then().assertThat().statusCode(200);
+		
+		IDataSet dbDataSet = connection.createDataSet();
+		ITable actualTable = dbDataSet.getTable("CAR");
+
+		
+		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(
+				new File("src/test/resources/removeCarData.xml"));
+		ITable expectedTable = expectedDataSet.getTable("CAR");
+		
+		Assertion.assertEquals(expectedTable, actualTable);
+	}
+    
 
     @AfterClass
     public static void tearDown() throws Exception {
