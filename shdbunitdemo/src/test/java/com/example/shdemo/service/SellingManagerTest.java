@@ -1,7 +1,8 @@
 package com.example.shdemo.service;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Ignore;
@@ -27,15 +28,23 @@ public class SellingManagerTest {
 
 	private final String NAME_1 = "Bolek";
 	private final String PIN_1 = "1234";
+	private final Date DATE = new Date();
 
 	private final String NAME_2 = "Lolek";
 	private final String PIN_2 = "4321";
+	
+	private final String NAME_3 = "Koziołek";
+	private final String PIN_3 = "1111";
 
 	private final String MODEL_1 = "126p";
 	private final String MAKE_1 = "Fiat";
+	private final Boolean SOLD_1 = false;
 
 	private final String MODEL_2 = "Mondeo";
 	private final String MAKE_2 = "Ford";
+	
+	private final String MODEL_3 = "Racer";
+	private final String MAKE_3 = "Maluch";
 
 	@Test
 	public void addClientCheck() {
@@ -109,9 +118,32 @@ public class SellingManagerTest {
 		assertEquals(MODEL_2, ownedCars.get(0).getModel());
 	}
 
-	// @Test -
+	@Test
 	public void disposeCarCheck() {
 		// Do it yourself
+		
+		Person person = new Person();
+		person.setFirstName(NAME_3);
+		person.setPin(PIN_3);
+		
+		sellingManager.addClient(person);
+		
+		Car car = new Car();
+		car.setMake(MAKE_3);
+		car.setModel(MODEL_3);
+		car.setSold(true);
+	
+		
+		Long carId = sellingManager.addNewCar(car);
+		
+		
+		Person person2 = sellingManager.findClientByPin(PIN_3);
+		Car car2 = sellingManager.findCarById(carId);
+		
+		sellingManager.disposeCar(person2, car2);
+		
+		assertEquals(0, person2.getCars().size());
 	}
+
 
 }

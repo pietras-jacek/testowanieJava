@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <CAR ID="3" MAKE="Fiat" MODEL="126p" SOLD="true"/>
+  <CAR ID="4" MAKE="Ford" MODEL="Mondeo" SOLD="true"/>
+  <PERSON ID="3" FIRSTNAME="Lolek" PIN="4321" REGISTRATIONDATE="2016-06-20"/>
+  <PERSON ID="4" FIRSTNAME="Bolek" PIN="1234" REGISTRATIONDATE="2016-06-20"/>
+</dataset>

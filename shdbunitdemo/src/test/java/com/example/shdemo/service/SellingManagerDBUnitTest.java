@@ -25,9 +25,10 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/beans.xml" })
-@TransactionConfiguration(transactionManager = "txManager", defaultRollback = false)
+@TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 @Transactional
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
     DirtiesContextTestExecutionListener.class,
@@ -52,6 +53,67 @@ public class SellingManagerDBUnitTest {
         
         sellingManager.addClient(p);
 	}
-
+	
+	@Test
+	@DatabaseSetup("/fullData.xml")
+	@ExpectedDatabase(value = "/addPersonData.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void addClientCheck() {
+		
+		Person p = new Person();
+        p.setFirstName("Kaziu");
+        p.setPin("8754");
+        p.setRegistrationDate(new Date());
+        
+        sellingManager.addClient(p); 
+	}
+	
+	@Test
+	@DatabaseSetup("/fullData.xml")
+	public void findClientByPinCheck() {
+		Person p0;
+		p0 = sellingManager.findClientByPin("1234");
+		assertEquals("1234", p0.getPin());
+	}
+	
+	@Test
+	@DatabaseSetup("/fullData.xml")
+	@ExpectedDatabase(value = "/addCarData.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void addCarCheck() {
+		
+		Car car = new Car();
+		car.setId(5L);
+		car.setMake("Skoda");
+		car.setModel("Fabia");
+        car.setSold(false);
+        
+        sellingManager.addNewCar(car); 
+        
+	}
+	
+	@Test
+	@DatabaseSetup("/fullData.xml")
+	public void getCarsCheck() {
+		
+        assertEquals(1, sellingManager.getAvailableCars().size());
+	}
+	
+	@Test
+	@DatabaseSetup("/fullData.xml")
+	public void findCarByIdCheck() {
+		Car c0;
+		c0 = sellingManager.findCarById(3L);
+		assertEquals("Fiat", c0.getMake());
+	}
+	
+	@Test
+	@DatabaseSetup("/fullData.xml")
+	@ExpectedDatabase(value = "/sellCarData.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	public void sellCarCheck () {
+		Person prsn = sellingManager.findClientByPin("1234");
+		Car cr = sellingManager.findCarById(3L);
+		
+		sellingManager.sellCar(prsn.getId(), cr.getId());
+		assertEquals(0, sellingManager.getAvailableCars().size());
+	}
 	
 }
